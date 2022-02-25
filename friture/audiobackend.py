@@ -17,6 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+
+# Kingson: this code communicate with the soundcard and stream the audio data of all channels out, with fixed FRAMES_PER_BUFFER = 512
+
+
 import logging
 import math
 
@@ -322,15 +326,23 @@ class __AudioBackend(QtCore.QObject):
 
         # by default we open the device stream with all the channels
         # (interleaved in the data buffer)
+
+#        nchannels_max = 2
         stream = rtmixer.Recorder(
             device=device['index'],
             channels=device['max_input_channels'],
+#            channels=nchannels_max,  
             blocksize=FRAMES_PER_BUFFER,
             # latency=latency,
             samplerate=SAMPLING_RATE)
 
         sampleSize = 4  # the sample size in bytes (float32)
         nchannels_max = device['max_input_channels']  # the number of channels that we record
+
+# Kingson: I added this line
+#        self.logger.info("nchannels_max '%f'", nchannels_max)
+# Kingson: I added this line, output is 32 on my computer
+
         elementSize = nchannels_max * sampleSize
 
         # arbitrary size to avoid overflows without using too much memory

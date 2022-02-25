@@ -52,5 +52,5 @@ class AudioBuffer(QtCore.QObject):
     def handle_new_data(self, floatdata, input_time, status):
         self.ringbuffer.push(floatdata)
         self.set_newdata(floatdata.shape[1])
-        self.new_data_available.emit(floatdata)
+        self.new_data_available.emit(floatdata)  # Kingson: floatdata here is the audio data that can be plot in the GUI scope
         self.lastDataTime = input_time

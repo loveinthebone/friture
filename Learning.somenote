@@ -1,0 +1,19 @@
+"""Learning.
+
+My current goal is to find where the data is from for the 2D spectrogram.
+
+
+About signal and slots:
+	ref: https://doc.bccnsoft.com/docs/PyQt5/signals_slots.html
+
+	# This defines a signal called 'closed' that takes no arguments.
+	    closed = pyqtSignal()
+
+	# This defines a signal called 'rangeChanged' that takes two
+	# integer arguments.
+	    range_changed = pyqtSignal(int, int, name='rangeChanged')
+
+	Signals are connected to slots using the connect() method of a bound signal.
+
+
+"""

@@ -19,6 +19,9 @@
 
 # FIXME problem when self.offset overflows the MAXINT limit !
 
+# Kingson: this script create a buffer to save the data read from the audio stream and output the right amount to the audio analysis scripts.
+# In my understanding, a ring buffer is like a queue, new data add to the bottom of the queue, old data go out on the front of the queue
+
 import logging
 
 from numpy import zeros

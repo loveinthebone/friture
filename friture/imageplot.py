@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+# Kingson: looks this is for plotting the fft spectrum
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from fractions import Fraction
 import numpy as np

@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+# Kingson This code looks only deal with how the scope plot should update the appearance.
+
 from PyQt5 import QtCore
 from PyQt5.QtCore import pyqtProperty
 from PyQt5.QtQml import QQmlListProperty

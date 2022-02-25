@@ -17,6 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+
+
+
 """Spectrogram widget, that displays a rolling 2D image of the time-frequency spectrum."""
 
 from PyQt5 import QtWidgets

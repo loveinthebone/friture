@@ -24,11 +24,11 @@ from friture.audiobackend import SAMPLING_RATE
 import friture.plotting.frequency_scales as fscales
 
 # shared with spectrum_settings.py
-DEFAULT_FFT_SIZE = 8  # 8192 points
+DEFAULT_FFT_SIZE = 9  # 8192 points
 DEFAULT_FREQ_SCALE = 2  # Mel
-DEFAULT_MAXFREQ = 20000
-DEFAULT_MINFREQ = 20
-DEFAULT_SPEC_MIN = -100
+DEFAULT_MAXFREQ = 12000
+DEFAULT_MINFREQ = 200
+DEFAULT_SPEC_MIN = -130
 DEFAULT_SPEC_MAX = -20
 DEFAULT_WEIGHTING = 1  # A
 DEFAULT_SHOW_FREQ_LABELS = True

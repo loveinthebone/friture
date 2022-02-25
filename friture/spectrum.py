@@ -17,6 +17,9 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+
+"""Kingson: this code plot the FFT spectrum plot"""
+
 from PyQt5 import QtWidgets
 from numpy import log10, argmax, zeros, arange, floor, float64
 from friture.audioproc import audioproc  # audio processing class
@@ -137,7 +140,7 @@ class Spectrum_Widget(QtWidgets.QWidget):
             sp1 = pyx_exp_smoothed_value_numpy(self.kernel, self.alpha, sp1n, self.dispbuffers1)
             sp2 = pyx_exp_smoothed_value_numpy(self.kernel, self.alpha, sp2n, self.dispbuffers2)
             # store result for next computation
-            self.dispbuffers1 = sp1
+            self.dispbuffers1 = sp1 #Kingson: display buffer?
             self.dispbuffers2 = sp2
 
             sp1.shape = self.freq.shape

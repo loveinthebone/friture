@@ -69,6 +69,27 @@ python3.9 setup.py build_ext --inplace
 python3.9 main.py
 ```
 
+
+'''
+Kingson notes:
+
+Here is how to install the application on this computer:
+cd friture
+python3.9 setup.py install --user
+
+
+
+Here is how to compile the program then run the app:
+source ./buildenv/bin/activate
+python3.9 main.py
+
+
+
+Here is how to run directly the application in this Mint machine:
+cd /home/kingson/.local/bin
+friture
+'''
+
 ## Running Friture from source on Windows
 
 The following steps can be used to prepare a development environment for Friture on Windows.

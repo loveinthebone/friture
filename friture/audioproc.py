@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+# Kingson: this is the code implementing the FFT algorithm
+
 import logging
 
 from numpy import linspace, log10, cos, arange, pi

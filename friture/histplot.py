@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with Friture.  If not, see <http://www.gnu.org/licenses/>.
 
+"""Kingson: code for ploting the 2D histogram"""
+
 from PyQt5 import Qt, QtWidgets
 from numpy import zeros, ones, log10, array
 from friture.histogramitem import HistogramItem

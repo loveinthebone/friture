@@ -90,13 +90,15 @@ class Scope_Widget(QtWidgets.QWidget):
 
     # method
     def set_buffer(self, buffer):
-        self.audiobuffer = buffer
+        self.audiobuffer = buffer  #Kingson: here only prepare a buffer space in memory, still empty, no data in it.
 
     def handle_new_data(self, floatdata):
         time = self.timerange * 1e-3
         width = int(time * SAMPLING_RATE)
         # basic trigger capability on leading edge
         floatdata = self.audiobuffer.data(2 * width)
+
+#        print(floatdata.shape) # Kingson : I added this line, the result is (2,4800)
 
         twoChannels = False
         if floatdata.shape[0] > 1:
