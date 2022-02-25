@@ -26,6 +26,7 @@ import logging
 import logging.handlers
 
 from PyQt5 import QtCore
+
 # specifically import from PyQt5.QtGui and QWidgets for startup time improvement :
 from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QApplication, QSplashScreen
 from PyQt5.QtGui import QPixmap
@@ -156,6 +157,7 @@ class Friture(QMainWindow, ):
         # make sure the toolbar is shown
         # in case it was closed by mistake (before it was made impossible)
         self.ui.toolBar.setVisible(True)
+#        self.ui.toolBar.setVisible(False) #Kingson: I set it invisible here
 
         # prevent from hiding or moving the toolbar
         self.ui.toolBar.toggleViewAction().setVisible(False)
