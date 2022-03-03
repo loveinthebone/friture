@@ -51,7 +51,7 @@ class audioproc():
 ###################Kingson#########
     def analyzepoint(self,samples, freq): #return the fft amplitude at specific frequency
         spectrum=self.analyzelive(self,samples)
-        index= argmin(spectrum, key=lambda x:abs(x-freq))
+        index= argmin(self.freq, key=lambda x:abs(x-freq))
         amp_point=spectrum[index]
         return amp_point
 ###################Kingson#########

@@ -30,23 +30,6 @@ from friture.scope_data import Scope_Data
 from friture.curve import Curve
 from friture.qml_tools import qml_url, raise_if_error
 
-#################
-from friture.audioproc import audioproc  # audio processing class
-from friture.spectrum_settings import (Spectrum_Settings_Dialog,  # settings dialog
-                                       DEFAULT_FFT_SIZE,
-                                       DEFAULT_FREQ_SCALE,
-                                       DEFAULT_MAXFREQ,
-                                       DEFAULT_MINFREQ,
-                                       DEFAULT_SPEC_MIN,
-                                       DEFAULT_SPEC_MAX,
-                                       DEFAULT_WEIGHTING,
-                                       DEFAULT_RESPONSE_TIME,
-                                       DEFAULT_SHOW_FREQ_LABELS)
-import friture.plotting.frequency_scales as fscales
-
-from friture.audiobackend import SAMPLING_RATE
-
-
 SMOOTH_DISPLAY_TIMER_PERIOD_MS = 25
 DEFAULT_TIMERANGE = 2 * SMOOTH_DISPLAY_TIMER_PERIOD_MS
 
@@ -58,7 +41,6 @@ class Scope_Widget(QtWidgets.QWidget):
         self.logger = logging.getLogger(__name__)
 
         self.audiobuffer = None
-        self.proc = audioproc()
 
         store = GetStore()
         self._scope_data = Scope_Data(store)
