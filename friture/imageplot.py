@@ -64,17 +64,21 @@ class PlotImage:
         self.last_time = 0.
 
     def addData(self, freq, xyzs, freqscale, last_data_time):
-        self.frequency_resampler.setfreqscale(freqscale)
+        self.frequency_resampler.setfreqscale(freqscale) #Kingson freqscale here is taken "Mel"
 
         # Note: both the frequency and the time resampler work
-        # only on 1D arrays, so we loop on the columns of data.
+        # only on 1D arrays, so w2e loop on the columns of data.
         # However, we reassemble the 2D output before drawing
         # on the widget's pixmap, because the drawing operation
         # seems to have a costly warmup phase, so it is better
         # to invoke it the fewer number of times possible.
 
+        # KINGSON: don't understand how the resampling works here
         n = self.resampler.processable(xyzs.shape[1])
         resampled_data = np.zeros((self.frequency_resampler.nsamples, n))
+        #Kingson: nsamples here is determined by the spectrogram image canvas height.
+        #            when the canvas height is lowered, the fft points needed also reduces, 
+        #           so do the required measurement points for the fft operation.
 
         i = 0
         for j in range(xyzs.shape[1]):

@@ -43,7 +43,7 @@ class Frequency_Resampler:
     def update_xscale(self):
         self.xscaled = self.scale.inverse(np.linspace(self.scale.transform(self.minfreq), self.scale.transform(self.maxfreq), self.nsamples))
         
-    def setnsamples(self, nsamples):
+    def setnsamples(self, nsamples): #nsamples changes when I resize the window.
         if self.nsamples != nsamples:
             self.nsamples = nsamples
             self.update_xscale()

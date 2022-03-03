@@ -40,7 +40,7 @@ from friture.spectrumPlotWidget import SpectrumPlotWidget
 from friture_extensions.exp_smoothing_conv import pyx_exp_smoothed_value_numpy
 
 
-class Spectrum_Widget(QtWidgets.QWidget):
+class Spectrum_Widget1(QtWidgets.QWidget):
 
     def __init__(self, parent, engine):
         super().__init__(parent)
@@ -69,6 +69,9 @@ class Spectrum_Widget(QtWidgets.QWidget):
         self.dual_channels = False
         self.response_time = DEFAULT_RESPONSE_TIME
 
+        self.fft_freq1=0
+        self.fft_freq2=0
+
         self.update_weighting()
         self.freq = self.proc.get_freq_scale()
 
@@ -84,7 +87,9 @@ class Spectrum_Widget(QtWidgets.QWidget):
         self.PlotZoneSpect.setfreqrange(self.minfreq, self.maxfreq)
         self.PlotZoneSpect.setspecrange(self.spec_min, self.spec_max)
         self.PlotZoneSpect.setweighting(self.weighting)
-        self.PlotZoneSpect.set_peaks_enabled(True)
+
+        # self.PlotZoneSpect.set_peaks_enabled(True)
+        self.PlotZoneSpect.set_peaks_enabled(False)
         self.PlotZoneSpect.set_baseline_displayUnits(0.)
         self.PlotZoneSpect.setShowFreqLabel(DEFAULT_SHOW_FREQ_LABELS)
 
@@ -149,6 +154,8 @@ class Spectrum_Widget(QtWidgets.QWidget):
 
             if self.dual_channels and floatdata.shape[0] > 1:
                 dB_spectrogram = self.log_spectrogram(sp2) - self.log_spectrogram(sp1)
+                self.fft_freq1=(dB_spectrogram[10])
+                self.fft_freq2=(dB_spectrogram[20])
             else:
                 dB_spectrogram = self.log_spectrogram(sp1) + self.w
 

@@ -39,6 +39,7 @@ import friture.plotting.frequency_scales as fscales
 
 from friture.audiobackend import SAMPLING_RATE, FRAMES_PER_BUFFER, AudioBackend
 from fractions import Fraction
+from friture.curve import Curve
 
 
 class Spectrogram_Widget(QtWidgets.QWidget):
@@ -140,7 +141,8 @@ class Spectrogram_Widget(QtWidgets.QWidget):
                 floatdata = floatdata[0, :]
 
                 # FFT transform
-                spn[:, i] = self.proc.analyzelive(floatdata)
+                # spn[:, i] = self.proc.analyzelive(floatdata)
+                amp_point1
 
 
                 self.old_index += int(needed)

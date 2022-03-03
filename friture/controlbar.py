@@ -33,7 +33,7 @@ class ControlBar(QtWidgets.QWidget):
         self.combobox_select = QtWidgets.QComboBox(self)
 
         for widget in widgets:
-            self.combobox_select.addItem(widget["Name"])
+            self.combobox_select.addItem(widget["Name"])  #Kingson: Here is the line that add the plot to the UI
 
         self.combobox_select.setCurrentIndex(0)
         self.combobox_select.setToolTip("Select the type of audio widget")

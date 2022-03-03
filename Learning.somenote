@@ -15,5 +15,34 @@ About signal and slots:
 
 	Signals are connected to slots using the connect() method of a bound signal.
 
+in dock.py :
+	#Kingson: this two lines add the raw data to be used by the widgets
+	self.audiowidget.set_buffer(self.audiobuffer) 
+	self.audiobuffer.new_data_available.connect(self.audiowidget.handle_new_data) 
+
+controlbar.py is about how the selection list of different plot widget behaves.
+
+audioproc.py implement the fft algorithm.
+
+in spectroogram.py here plot the 2D fft graph:
+	norm_spectrogram = self.scale_spectrogram(self.log_spectrogram(spn) + w)
+	self.PlotZoneImage.addData(self.freq, norm_spectrogram, self.last_data_time)
+
+My goal now is to see how I can use the 2D spectrogram code, modify it, to extract the fft amp at 
+a specific frequency, then plot it in time domain, like the scope did. 
+
+
+friture/spectrogram_image.py is the code that plot the 2D spectrum image in the end.
+
+
+With scope.py he uses this to extract raw audio data:
+        floatdata = self.audiobuffer.data(2 * width)
+	and use following for plotting the time signal plot:
+		self._curve.setData(scaled_t, scaled_y)
+
+with spectrum.py, uses another way:
+		floatdata = self.audiobuffer.data_indexed(self.old_index, self.fft_size)
+	and use following for plotting the fft:
+	 	self.PlotZoneSpect.setdata(self.freq, dB_spectrogram, fmax)	
 
 """

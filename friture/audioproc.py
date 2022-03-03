@@ -21,7 +21,7 @@
 
 import logging
 
-from numpy import linspace, log10, cos, arange, pi
+from numpy import linspace, log10, cos, arange, pi, argmin
 from numpy.fft import rfft
 from friture.audiobackend import SAMPLING_RATE
 
@@ -45,8 +45,17 @@ class audioproc():
         # FFT for a linear transformation in frequency scale
         fft = rfft(samples * self.window)
         spectrum = self.norm_square(fft)
-
+        
         return spectrum
+
+###################Kingson#########
+    def analyzepoint(self,samples, freq): #return the fft amplitude at specific frequency
+        spectrum=self.analyzelive(self,samples)
+        index= argmin(spectrum, key=lambda x:abs(x-freq))
+        amp_point=spectrum[index]
+        return amp_point
+###################Kingson#########
+
 
     def norm_square(self, fft):
         return (fft*fft.conjugate()).real / self.size_sq

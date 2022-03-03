@@ -113,6 +113,7 @@ class Friture(QMainWindow, ):
 
         # Initialize the audio backend
         # signal containing new data from the audio callback thread, processed as numpy array
+        #Kingson if audiobackend has data, send it to audiobuffer
         AudioBackend().new_data_available.connect(self.audiobuffer.handle_new_data)
 
         # this timer is used to update widgets that just need to display as fast as they can
@@ -128,21 +129,23 @@ class Friture(QMainWindow, ):
 
         self.level_widget = Levels_Widget(self, self.qml_engine)
         self.level_widget.set_buffer(self.audiobuffer)
+        #Kingson: if audiobuffer has data, send it to level_widget
         self.audiobuffer.new_data_available.connect(self.level_widget.handle_new_data)
 
         self.hboxLayout = QHBoxLayout(self.ui.centralwidget)
         self.hboxLayout.setContentsMargins(0, 0, 0, 0)
-        self.hboxLayout.addWidget(self.level_widget)
+        # self.hboxLayout.addWidget(self.level_widget)
 
         self.centralLayout = TileLayout()
         self.centralLayout.setContentsMargins(0, 0, 0, 0)
         self.hboxLayout.addLayout(self.centralLayout)
 
+        #Kingson: the dockmanager manages other panels like fft and 2D fft and time domain panels
         self.dockmanager = DockManager(self)
 
         # timer ticks
         self.display_timer.timeout.connect(self.dockmanager.canvasUpdate)
-        self.display_timer.timeout.connect(self.level_widget.canvasUpdate)
+        # self.display_timer.timeout.connect(self.level_widget.canvasUpdate)
         self.display_timer.timeout.connect(AudioBackend().fetchAudioData)
 
         # toolbar clicks
@@ -401,8 +404,10 @@ def main():
     profile = "no"  # "python" or "kcachegrind" or anything else to disable
 
     if len(sys.argv) > 1:
+        
         if sys.argv[1] == "--python":
             profile = "python"
+           
         elif sys.argv[1] == "--kcachegrind":
             profile = "kcachegrind"
         elif sys.argv[1] == "--no":

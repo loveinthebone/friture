@@ -118,6 +118,8 @@ class CanvasScaledSpectrogram(QtCore.QObject):
         target2b = QtCore.QRectF(0, 0, folded, xyzs.shape[0])
 
         self.painter.begin(self.pixmap)
+        # Draws the rectangular portion source of the given image into the target rectangle in the paint device.
+        # void QPainter::drawImage(const QRectF &target, const QImage &image, const QRectF &source, Qt::ImageConversionFlags flags = Qt::AutoColor)
         self.painter.drawImage(target1, myimage, source1)
         self.painter.drawImage(target2a, myimage, source2a)
         self.painter.drawImage(target2b, myimage, source2b)

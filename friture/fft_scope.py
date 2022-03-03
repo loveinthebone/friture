@@ -30,6 +30,8 @@ from friture.scope_data import Scope_Data
 from friture.curve import Curve
 from friture.qml_tools import qml_url, raise_if_error
 
+from friture.fft_specificpoints_scope import Spectrum_Widget1
+
 SMOOTH_DISPLAY_TIMER_PERIOD_MS = 25
 DEFAULT_TIMERANGE = 2 * SMOOTH_DISPLAY_TIMER_PERIOD_MS
 
@@ -96,8 +98,8 @@ class Scope_Widget(QtWidgets.QWidget):
         time = self.timerange * 1e-3
         width = int(time * SAMPLING_RATE)
         # basic trigger capability on leading edge
-        floatdata = self.audiobuffer.data(2 * width)
-
+        # floatdata = self.audiobuffer.data(2 * width)
+        
 #        print(floatdata.shape) # Kingson : I added this line, the result is (2,4800)
 
         twoChannels = False

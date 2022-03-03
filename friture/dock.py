@@ -91,8 +91,10 @@ class Dock(QtWidgets.QWidget):
         else:
             self.audiowidget = constructor(self)
 
-        self.audiowidget.set_buffer(self.audiobuffer)
-        self.audiobuffer.new_data_available.connect(self.audiowidget.handle_new_data)
+
+        #Kingson: this two lines add the raw data to the plot widget
+        self.audiowidget.set_buffer(self.audiobuffer) 
+        self.audiobuffer.new_data_available.connect(self.audiowidget.handle_new_data) 
 
         self.layout.addWidget(self.audiowidget)
 
