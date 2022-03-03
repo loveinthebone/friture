@@ -104,6 +104,8 @@ class Spectrum_Widget(QtWidgets.QWidget):
         epsilon = 1e-30
         return 10. * log10(sp + epsilon)
 
+    
+
     def handle_new_data(self, floatdata):
         # we need to maintain an index of where we are in the buffer
         index = self.audiobuffer.ringbuffer.offset
@@ -159,6 +161,63 @@ class Spectrum_Widget(QtWidgets.QWidget):
             fmax = self.freq[i]
 
             self.PlotZoneSpect.setdata(self.freq, dB_spectrogram, fmax) #Kingson: Here send the data out to be plotted
+
+    def return_fft(self, floatdata):
+        # we need to maintain an index of where we are in the buffer
+        index = self.audiobuffer.ringbuffer.offset
+
+        available = index - self.old_index
+
+        if available < 0:
+            # ringbuffer must have grown or something...
+            available = 0
+            self.old_index = index
+
+        # if we have enough data to add a frequency column in the time-frequency plane, compute it
+        needed = self.fft_size * (1. - self.overlap)
+        realizable = int(floor(available / needed))
+
+        if realizable > 0:
+            sp1n = zeros((len(self.freq), realizable), dtype=float64)
+            sp2n = zeros((len(self.freq), realizable), dtype=float64)
+
+            for i in range(realizable):
+                floatdata = self.audiobuffer.data_indexed(self.old_index, self.fft_size)
+
+                # first channel
+                # FFT transform
+                sp1n[:, i] = self.proc.analyzelive(floatdata[0, :])
+
+                if self.dual_channels and floatdata.shape[0] > 1:
+                    # second channel for comparison
+                    sp2n[:, i] = self.proc.analyzelive(floatdata[1, :])
+
+                self.old_index += int(needed)
+
+            # compute the widget data
+            sp1 = pyx_exp_smoothed_value_numpy(self.kernel, self.alpha, sp1n, self.dispbuffers1)
+            sp2 = pyx_exp_smoothed_value_numpy(self.kernel, self.alpha, sp2n, self.dispbuffers2)
+            # store result for next computation
+            self.dispbuffers1 = sp1 #Kingson: display buffer?
+            self.dispbuffers2 = sp2
+
+            sp1.shape = self.freq.shape
+            sp2.shape = self.freq.shape
+            self.w.shape = self.freq.shape
+
+            if self.dual_channels and floatdata.shape[0] > 1:
+                dB_spectrogram = self.log_spectrogram(sp2) - self.log_spectrogram(sp1)
+            else:
+                dB_spectrogram = self.log_spectrogram(sp1) + self.w
+
+            # the log operation and the weighting could be deffered
+            # to the post-weedening !
+
+            i = argmax(dB_spectrogram)
+            fmax = self.freq[i]
+
+            return dB_spectrogram
+
 
     # method
     def canvasUpdate(self):
