@@ -1,0 +1,65 @@
+"""Learning.
+
+My current goal is to find where the data is from for the 2D spectrogram.
+
+
+About signal and slots:
+	ref: https://doc.bccnsoft.com/docs/PyQt5/signals_slots.html
+
+	# This defines a signal called 'closed' that takes no arguments.
+	    closed = pyqtSignal()
+
+	# This defines a signal called 'rangeChanged' that takes two
+	# integer arguments.
+	    range_changed = pyqtSignal(int, int, name='rangeChanged')
+
+	Signals are connected to slots using the connect() method of a bound signal.
+
+in dock.py :
+	#Kingson: this two lines add the raw data to be used by the widgets
+	self.audiowidget.set_buffer(self.audiobuffer) 
+	self.audiobuffer.new_data_available.connect(self.audiowidget.handle_new_data) 
+
+controlbar.py is about how the selection list of different plot widget behaves.
+
+audioproc.py implement the fft algorithm.
+
+in spectroogram.py here plot the 2D fft graph:
+	norm_spectrogram = self.scale_spectrogram(self.log_spectrogram(spn) + w)
+	self.PlotZoneImage.addData(self.freq, norm_spectrogram, self.last_data_time)
+
+My goal now is to see how I can use the 2D spectrogram code, modify it, to extract the fft amp at 
+a specific frequency, then plot it in time domain, like the scope did. 
+
+
+friture/spectrogram_image.py is the code that plot the 2D spectrum image in the end.
+
+
+With scope.py he uses this to extract raw audio data:
+        floatdata = self.audiobuffer.data(2 * width)
+	and use following for plotting the time signal plot:
+		self._curve.setData(scaled_t, scaled_y)
+
+with spectrum.py, uses another way:
+		floatdata = self.audiobuffer.data_indexed(self.old_index, self.fft_size)
+	and use following for plotting the fft:
+	 	self.PlotZoneSpect.setdata(self.freq, dB_spectrogram, fmax)	
+
+
+
+Error code:
+2022-03-03, 18:57:17 (Friture 0.48)
+Traceback (most recent call last):
+  File "/home/kingson/friture/friture/plotCurve.py", line 66, in updatePaintNode
+    geometry.allocate(self.curve.x_array().size) # geometry will be marked as dirty below
+AttributeError: 'list' object has no attribute 'size'
+
+
+20220310 My goal now is to find how to put axis ticks right, best is autoscale the fft amplitude signal.
+, or plot in linear scale from 0mV to 10 mV for example.
+
+Let me try to plot in linear scale first.
+
+I checked that even without autoscaling, just change the range of data to 0 to 0.001, and use linear scale
+the result already looks much better. Now let me see how to apply autoscale.
+"""
