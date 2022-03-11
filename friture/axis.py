@@ -12,7 +12,7 @@ class Axis(QtCore.QObject):
 
         self._name = "Axis Name"
         self._formatter = lambda x: str(x)
-        self._scale_division = ScaleDivision(-1., 1., self)
+        self._scale_division = ScaleDivision(-1., 1., self) #Kingson: this is vertical scale I think
         self._coordinate_transform = CoordinateTransform(-1, 1, 1., 0, 0, self)
 
     @pyqtProperty(str, notify=name_changed)

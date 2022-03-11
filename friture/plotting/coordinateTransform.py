@@ -30,7 +30,8 @@ class CoordinateTransform(QtCore.QObject):
     def __init__(self, coord_min, coord_max, length, startBorder, endBorder, parent=None):
         super(CoordinateTransform, self).__init__(parent)
 
-        self.coord_min = coord_min
+        self.coord_min = coord_min #Kingson: this is plot coordinates, the frequency for example
+        
         self.coord_max = coord_max
         self.coord_clipped_min = max(1e-20, self.coord_min)
         self.coord_clipped_max = max(self.coord_clipped_min, self.coord_max)

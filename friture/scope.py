@@ -30,7 +30,7 @@ from friture.audiobackend import SAMPLING_RATE
 from friture.scope_data import Scope_Data
 from friture.curve import Curve
 from friture.qml_tools import qml_url, raise_if_error
-from friture.databridge import bridge
+
 
 SMOOTH_DISPLAY_TIMER_PERIOD_MS = 25
 DEFAULT_TIMERANGE = 2 * SMOOTH_DISPLAY_TIMER_PERIOD_MS
@@ -84,7 +84,7 @@ class Scope_Widget(QtWidgets.QWidget):
         self.time = zeros(10)
         self.y = zeros(10)
         self.y2 = zeros(10)
-        self.Bridge=bridge()
+        # self.Bridge=bridge()
 
         # self.fft1=Spectrum_Widget
 
@@ -163,24 +163,6 @@ class Scope_Widget(QtWidgets.QWidget):
         scaled_y = 1. - (self.y + 1) / 2.  # if the range of y is (-1:1),make sure in the end, the y axis range is (2:0)
         self._curve.setData(scaled_t, scaled_y)
        
-
-       
-       
-       
-        # a=arange(100)/100
-        # b=self.Bridge.read()
-#         b=sin(arange(100))
-#         b=0.5*ones(100)
-#         np.array([1, 2, 3])
-# ###############################################Kingson*************
-        # The _curve function will only plot the data with x in the range of 0 to 1, and y in the range of -1 to 1, following code showed such an arrangement:
-        # a=array([0, 0.5, 1])
-        # b=array([-1,0.4, 1])
-        # b=1-(b+1)/2.
-        # self._curve.setData(a, b)
-##############################################Kingson **************
-
-
 
         if self.y2 is not None:
             scaled_y2 = 1. - (self.y2 + 1) / 2.

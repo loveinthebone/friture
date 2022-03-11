@@ -44,14 +44,16 @@ git checkout origin/<branchName>
 
 ```
 sudo python3.9 -m pip install --upgrade pip
-sudo pip3.9 install --upgrade setuptools
+sudo python3.9 -m pip install --upgrade pip
 sudo pip3.9 install --upgrade virtualenv
 ```
 
-7. Create a virtualenv and activate it
+7. Create a virtualenv and activate it, or deactivate it
 ```
 virtualenv  -p /usr/bin/python3.9 buildenv
 source ./buildenv/bin/activate
+
+deactivate
 ```
 
 8. Install Friture requirements (PyQt5, etc.)

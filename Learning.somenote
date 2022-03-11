@@ -62,4 +62,6 @@ Let me try to plot in linear scale first.
 
 I checked that even without autoscaling, just change the range of data to 0 to 0.001, and use linear scale
 the result already looks much better. Now let me see how to apply autoscale.
+
+Now let me continue with the scaling.
 """
